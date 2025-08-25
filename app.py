@@ -20,24 +20,20 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)'''
-import streamlit as st
 import pickle
-import numpy as np
+import streamlit as st
 
 # Load model
 with open("student_success_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-st.title("Student Success Predictor")
+st.title("Student Success Prediction")
+# Example input
+study_hours = st.number_input("Study Hours", 0, 10)
+attendance = st.number_input("Attendance %", 0, 100)
+past_score = st.number_input("Past Score", 0, 100)
+social_media = st.number_input("Social Media Hours", 0, 10)
 
-# Input fields
-study_hours = st.number_input("Study Hours per Day", min_value=0.0, max_value=24.0, value=4.0)
-attendance = st.number_input("Attendance %", min_value=0, max_value=100, value=80)
-past_score = st.number_input("Past Exam Score", min_value=0, max_value=100, value=70)
-social_hours = st.number_input("Social Media Hours per Day", min_value=0, max_value=24, value=2)
-
-# Predict button
 if st.button("Predict"):
-    input_data = np.array([[study_hours, attendance, past_score, social_hours]])
-    prediction = model.predict(input_data)[0]
-    st.success(f"The student is likely to {'Pass' if prediction==1 else 'Fail'}")
+    prediction = model.predict([[study_hours, attendance, past_score, social_media]])
+    st.write("Pass" if prediction[0] == 1 else "Fail")
