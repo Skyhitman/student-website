@@ -45,5 +45,7 @@ print("Validation Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
 # 5) Save model
-joblib.dump(rf, "student_success_model.pkl")
-print("Saved model to student_success_model.pkl")
+# 5) Save model
+joblib.dump(rf, "student_success_model.joblib")
+print("Saved model to student_success_model.joblib")
+
