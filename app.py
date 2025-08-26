@@ -20,12 +20,14 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)'''
-import pickle
+
 import streamlit as st
 
 # Load model
-with open("student_success_model.pkl", "rb") as f:
-    model = pickle.load(f)
+from joblib import load
+
+model = load("student_success_model.joblib")
+
 
 st.title("Student Success Prediction")
 # Example input
